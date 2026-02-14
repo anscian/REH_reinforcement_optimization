@@ -1,0 +1,15 @@
+# /extract
+/extract/dataset/**
+!/extract/dataset/
+!/extract/dataset/results.csv.example
+!/extract/dataset/images/
+!/extract/dataset/images/.gitkeep
+
+# /transform
+/transform/dataset/**
+!/transform/dataset/
+!/transform/dataset/images/
+!/transform/dataset/images/.gitkeep
+!/transform/dataset/results.csv.example
+!/transform/dataset/batches/
+!/transform/dataset/batches/.gitkeep
