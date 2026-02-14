@@ -13,3 +13,10 @@
 !/transform/dataset/results.csv.example
 !/transform/dataset/batches/
 !/transform/dataset/batches/.gitkeep
+
+# /model
+/model/dataset/**
+!/model/dataset/
+!/model/dataset/images/
+!/model/dataset/images/.gitkeep
+!/model/dataset/results.csv.example
