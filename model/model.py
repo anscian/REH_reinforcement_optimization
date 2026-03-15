@@ -13,11 +13,11 @@ DEVICE = torch.device('cpu')
 IMAGES_DIR  = './dataset/images'
 DATA_PATH   = './dataset/results.csv'
 IMG_EXT     = '.png'
-BATCH_SIZE  = 32
+BATCH_SIZE  = 16
 NUM_WORKERS = 0
 
 from src.image_encoder.resnet import ResnetEncoder as ImageEncoder
-IMAGE_ENCODER_INIT_PARAMS = [18], {'pre_trained' : True}
+IMAGE_ENCODER_INIT_PARAMS = [18], {'pre_trained' : True, 'freeze' : True}
 
 SCALER_DIM = 3
 MLP_ARCHITECTURE = [

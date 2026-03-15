@@ -4,13 +4,14 @@ from torchvision.models import resnet18, resnet34, ResNet18_Weights, ResNet34_We
 
 
 class ResnetEncoder(nn.Module):
-    def __init__(self, param_layers : int = 18, pre_trained : bool = False) -> None:
+    def __init__(self, param_layers : int = 18, pre_trained : bool = False, freeze : bool = True) -> None:
         '''
         Initialize Standard Resnet Architecture (18 or 34 layers)
-        ---------------------------------------------------------
+        ------------------------------------------------------------
         Parameters:
             param_layers : number of parameter layes [18 or 34]
             pre_trained  : whether pre-trained weights are used
+            freeze       : the model weights are frozen for training
         Returns:
         '''
 
@@ -35,6 +36,11 @@ class ResnetEncoder(nn.Module):
 
         self.encoding_size = self.encoder.fc.in_features
         self.encoder.fc = nn.Identity()
+
+        if freeze:
+            for param in self.encoder.parameters():
+                param.requires_grad = False
+        self.frozen_encoder = freeze
 
 
     def forward(self, imgs : torch.Tensor) -> torch.tensor:
