@@ -38,7 +38,9 @@ class ResnetEncoder(nn.Module):
         self.encoder.fc = nn.Identity()
 
         if freeze:
-            for param in self.encoder.parameters():
+            for param in self.encoder.conv1.parameters():
+                param.requires_grad = False
+            for param in self.encoder.layer1.parameters():
                 param.requires_grad = False
         self.frozen_encoder = freeze
 
