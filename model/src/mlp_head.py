@@ -31,6 +31,7 @@ class MLPHead(nn.Module):
 
         super().__init__()
 
+        archi = archi.copy()
         archi.append({'out_dim' : 2})
         archi[0]['in_dim'] = image_encoding_dim + scaler_dim
         for i in range(1, len(archi)):

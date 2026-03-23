@@ -191,7 +191,7 @@ if __name__ == '__main__':
                 'image_encoder' : {'lr' : 1e-3},
                 'mlp_head'      : {'lr' : 1e-3},
             },
-            'epochs'  : 30,
+            'epochs'  : 50,
             'loss_fn' : 'torch.nn.SmoothL1Loss'
         }
     }
@@ -213,6 +213,7 @@ if __name__ == '__main__':
         'model_state_dict' : model.state_dict(),
         'config' : model.config,
     }, model_save_path)
+    print('Model saved', end='\n\n')
 
     print('Testing model on test set')
     print('Test loss : ', model.test_model())

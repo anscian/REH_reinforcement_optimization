@@ -25,3 +25,4 @@ __pycache__
 !/model/dataset/images/.gitkeep
 !/model/dataset/results.csv.example
 /model/*.pth
+/model/*.png

@@ -31,6 +31,7 @@ class ConvEncoder(nn.Module):
 
         super().__init__()
 
+        archi = archi.copy()
         archi[0]['in_channels'] = 1
         for i in range(1, len(archi)):
             archi[i]['in_channels'] = archi[i - 1]['out_channels']
