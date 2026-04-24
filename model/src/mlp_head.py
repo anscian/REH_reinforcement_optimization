@@ -10,7 +10,7 @@ class MLPHead(nn.Module):
         ----------------------------------------------------------------------------------------------------------------
         Parameters:
             image_encoding_dim : E, the size of image encoding
-            scaler_dim         : S, the size of metadata vector
+            scaler_dim         : S, the size of metadata vector (handles 0 too)
             archi              : A list of dictionaries each describing ONLY the hidden layers of FCNN
                                  
                                  **
@@ -30,6 +30,8 @@ class MLPHead(nn.Module):
         '''
 
         super().__init__()
+
+        self.has_scaler = scaler_dim > 0
 
         archi = archi.copy()
         archi.append({'out_dim' : 2})
@@ -66,5 +68,5 @@ class MLPHead(nn.Module):
             Torch tensor (B, 2) from which predictions would be derived
         '''
 
-        x = torch.cat([img_enc, scaler], dim=1)
+        x = torch.cat([img_enc, scaler], dim=1) if self.has_scaler else img_enc
         return self.fcnn(x)

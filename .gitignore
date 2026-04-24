@@ -26,3 +26,5 @@ __pycache__
 !/model/dataset/results.csv.example
 /model/*.pth
 /model/*.png
+/model/*.log
+/model/*.json

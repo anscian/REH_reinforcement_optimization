@@ -4,7 +4,7 @@ import torch
 import matplotlib.pyplot as plt
 
 
-checkpoint = torch.load('best.pth')
+checkpoint = torch.load('best_no_scaler.pth')
 
 pprint(checkpoint['config'])
 
@@ -55,5 +55,5 @@ for i in range(2):
     ax.grid(True)
 
 plt.tight_layout()
-plt.savefig('model_evaluation.png', dpi=300, bbox_inches='tight')
+plt.savefig('model_evaluation_no_scaler.png', dpi=300, bbox_inches='tight')
 plt.close()

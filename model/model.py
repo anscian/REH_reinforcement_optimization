@@ -183,7 +183,7 @@ if __name__ == '__main__':
                 {'out_dim' : 16, 'activation' : 'GELU', 'dropout' : 0.10},
                 {'out_dim' : 8, 'activation' : 'GELU'},
             ],
-            'scaler_dim' : 3,
+            'scaler_dim' : 0,
         },
         'train' : {
             'optimizer' : {
@@ -207,7 +207,7 @@ if __name__ == '__main__':
     model.train_model()
     print('Training complete', end='\n\n')
 
-    model_save_path = 'best.pth'
+    model_save_path = 'best_no_scaler.pth'
     print(f'Saving model to {model_save_path}')
     torch.save({
         'model_state_dict' : model.state_dict(),
