@@ -3,8 +3,8 @@ from pprint import pprint
 import torch
 import matplotlib.pyplot as plt
 
-
-checkpoint = torch.load('best_no_scaler.pth')
+run = 'no_scaler'
+checkpoint = torch.load(f'runs/{run}/best.pth')
 
 pprint(checkpoint['config'])
 
@@ -28,8 +28,15 @@ for img_tensor, scaler_tensor, target_tensor in model.test_loader:
 
 y_train_act, y_train_pred, y_test_act, y_test_pred = map(lambda x : torch.cat(x, dim=0), (y_train_act, y_train_pred, y_test_act, y_test_pred))
 
+mae = lambda act, pred : torch.mean(torch.abs(act - pred))
+r2 = lambda act, pred : 1 - torch.sum((act - pred)**2) / torch.sum((act - torch.mean(act))**2)
+print('Train MAE: E/Es', mae(y_train_act[:, 0], y_train_pred[:, 0]), 'v', mae(y_train_act[:, 1], y_train_pred[:, 1]))
+print('Test MAE: E/Es', mae(y_test_act[:, 0], y_test_pred[:, 0]), 'v', mae(y_test_act[:, 1], y_test_pred[:, 1]))
+print('Train R2: E/Es', r2(y_train_act[:, 0], y_train_pred[:, 0]), 'v', r2(y_train_act[:, 1], y_train_pred[:, 1]))
+print('Test R2: E/Es', r2(y_test_act[:, 0], y_test_pred[:, 0]), 'v', r2(y_test_act[:, 1], y_test_pred[:, 1]))
+
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-titles = ['E/Es', 'v']
+titles = ['$E/E_s$', '$\\nu$']
 
 for i in range(2):
     ax = axes[i]
@@ -48,12 +55,11 @@ for i in range(2):
 
     ax.plot([min_val, max_val], [min_val, max_val], 'k--', label="Ideal")
 
-    ax.set_xlabel("Actual")
-    ax.set_ylabel("Predicted")
-    ax.set_title(titles[i])
+    ax.set_xlabel("Actual " + titles[i])
+    ax.set_ylabel("Predicted " + titles[i])
     ax.legend()
     ax.grid(True)
 
 plt.tight_layout()
-plt.savefig('model_evaluation_no_scaler.png', dpi=300, bbox_inches='tight')
+plt.savefig(f'runs/{run}/model_evaluation.png', dpi=300, bbox_inches='tight')
 plt.close()

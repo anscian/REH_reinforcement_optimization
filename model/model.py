@@ -207,7 +207,7 @@ if __name__ == '__main__':
     model.train_model()
     print('Training complete', end='\n\n')
 
-    model_save_path = 'best_no_scaler.pth'
+    model_save_path = 'runs/no_scaler/best.pth'
     print(f'Saving model to {model_save_path}')
     torch.save({
         'model_state_dict' : model.state_dict(),
